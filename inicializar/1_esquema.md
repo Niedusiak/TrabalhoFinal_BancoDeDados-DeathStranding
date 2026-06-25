@@ -11,6 +11,7 @@ erDiagram
         int id_local PK
         varchar nome
         varchar tipo_instalacao
+        varchar regiao
         boolean status_rede_quiral
         int id_area FK
     }
@@ -41,11 +42,15 @@ erDiagram
         int id_pedido PK
         varchar status_pedido
         varchar condicao_final_carga
-        int quantidade_item
         int id_local_origem FK
         int id_local_destino FK
         int id_portador FK
-        int id_item FK
+    }
+
+    PEDIDO_ITEM {
+        int id_pedido PK, FK
+        int id_item PK, FK
+        int quantidade
     }
 
     ESTRUTURA {
@@ -64,16 +69,17 @@ erDiagram
         int id_portador FK
     }
 
-    CARACTERISTICA_AREA ||--o{ LOCAL : possui
-    CARACTERISTICA_AREA ||--o{ ESTRUTURA : abriga
-
-    LOCAL ||--|| PREPPER : residencia
-
-    LOCAL ||--o{ PEDIDO : origem
-    LOCAL ||--o{ PEDIDO : destino
-
-    PORTADOR ||--o{ PEDIDO : transporta
-    PORTADOR ||--o{ ESTRUTURA : constroi
-    PORTADOR ||--o{ AVALIACAO_LIKE : recebe
-
-    ITEM ||--o{ PEDIDO : compoe
+    %% Relacionamentos
+    CARACTERISTICA_AREA ||--o{ LOCAL : "possui"
+    CARACTERISTICA_AREA ||--o{ ESTRUTURA : "abriga"
+    LOCAL ||--|| PREPPER : "residencia"
+    
+    LOCAL ||--o{ PEDIDO : "emite (Origem)"
+    LOCAL ||--o{ PEDIDO : "recebe (Destino)"
+    
+    PORTADOR ||--o{ PEDIDO : "transporta"
+    PORTADOR ||--o{ ESTRUTURA : "constroi"
+    PORTADOR ||--o{ AVALIACAO_LIKE : "recebe"
+    
+    PEDIDO ||--o{ PEDIDO_ITEM : "contém"
+    ITEM ||--o{ PEDIDO_ITEM : "compõe"
