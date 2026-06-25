@@ -10,33 +10,44 @@ Integrantes
 
 Descrição do Problema
 
-Contexto
+1. Contexto do Problema (Death Stranding)
 
-O sistema modela a rede logística do universo de Death Stranding, um cenário pós-apocalíptico onde a civilização humana foi fragmentada após um evento catastrófico denominado Death Stranding. Nesse contexto, a humanidade sobrevive em instalações isoladas, e a reconexão entre essas comunidades se dá por meio de porters — carregadores responsáveis por transportar cargas entre os diferentes pontos habitados. Toda a comunicação e coordenação logística é mediada pela Rede Quiral (Chiral Network), uma infraestrutura tecnológica que conecta as instalações e permite o compartilhamento de recursos e informações entre os sobreviventes.
+O sistema modela a rede logística do universo de Death Stranding, um cenário pós-apocalíptico onde a civilização humana foi fragmentada após um evento catastrófico que deu origem a eventos paranormais, conectando o mundo dos mortos ao mundo dos vivos. A humanidade foi obrigada a se isolar em abrigos e instalações fortificadas por medo das EPs (Entidades da Praia).
 
-Objetivo do Sistema
+Nesse contexto, a reconexão entre essas comunidades se dá por meio dos Porters (entregadores, como Sam Porter Bridges), que realizam o trabalho duro de transportar cargas entre os diferentes pontos habitados, enfrentando os perigos do lado de fora. Toda a comunicação e coordenação logística é mediada pela Rede Quiral (Chiral Network), uma infraestrutura tecnológica que conecta as instalações e permite o compartilhamento de dados e recursos entre os sobreviventes.
 
-O banco de dados tem como objetivo registrar e gerenciar as operações logísticas da rede de entregas, contemplando:
+2. Objetivo do Sistema
 
+O banco de dados tem como objetivo registrar e gerenciar as operações logísticas da rede de entregas. Para isso, o escopo do banco contempla o gerenciamento das seguintes entidades:
 
-O cadastro de instalações (bunkers, cidades-nó, abrigos e postos avançados) distribuídas por diferentes regiões do território;
-O registro de porters responsáveis pelas entregas e sua relação com as instalações;
-O controle de cargas e seus respectivos tipos, com atributos como peso, fragilidade e condição;
-O gerenciamento de pedidos de entrega entre instalações, com rastreamento do estado de cada pedido;
-O registro das entregas executadas, associando porters, pedidos e avaliações de desempenho;
-O mapeamento de rotas entre instalações, incluindo condições de percurso como exposição a timefall (chuva quiral que acelera o envelhecimento da carga);
-O registro de estruturas construídas pelos porters ao longo das rotas (pontes, escadas, geradores), com controle de durabilidade;
-Um sistema de likes que permite aos porters avaliarem entregas realizadas e estruturas utilizadas;
-O monitoramento de eventos de timefall por região, que impactam diretamente a degradação de cargas e rotas;
-O acompanhamento do nível de conexão quiral de cada instalação à rede, que evolui conforme entregas são realizadas.
+Locais: Cadastro de instalações (bunkers, cidades-nó, abrigos e postos avançados) espalhadas pelo mundo e seu status na Rede Quiral.
 
+Características de Área: Mapeamento das condições geográficas e climáticas das regiões (como tipo de terreno, clima, exposição a Timefall e presença de EPs).
 
-Restrições Principais
+Portadores: Registro dos entregadores ativos no sistema, suas estatísticas e capacidade máxima de carga.
 
+Preppers: Sobreviventes e clientes cadastrados no sistema que emitem os pedidos e recebem entregas em seus respectivos abrigos, possuindo um nível de conexão (Estrelas).
 
-Toda entrega deve estar associada a um pedido válido e a um porter ativo;
-O peso total da carga de uma entrega não pode exceder a capacidade máxima do porter;
-Uma instalação só pode emitir pedidos se estiver conectada à Rede Quiral;
-Cargas com alto grau de fragilidade exigem rotas sem exposição a timefall;
-O nível de conexão quiral de uma instalação é atualizado automaticamente ao término de entregas bem-sucedidas com destino a ela;
-Estruturas possuem durabilidade limitada e devem ser monitoradas para manutenção.
+Itens: Catálogo de tipos de carga circulantes na rede (ex: medicamentos, peças, alimentos, metais), com suas características de fragilidade e peso padrão.
+
+Pedidos: Controle das solicitações de entrega, ligando o Prepper de origem ao Prepper de destino, além de registrar a carga transportada e seu status.
+
+Estruturas: Registro de ferramentas de infraestrutura construídas pelos Portadores (pontes, escadas, geradores) e monitoramento de sua durabilidade.
+
+Likes: Sistema de avaliação quantitativa que contabiliza o reconhecimento recebido pelos Portadores ao concluírem entregas ou ao terem suas estruturas utilizadas por outros.
+
+3. Restrições e Regras de Negócio
+
+Para o funcionamento adequado da malha logística, o sistema impõe as seguintes restrições que devem ser garantidas e modeladas pelo banco de dados:
+
+Validação de Entrega: Todo pedido de entrega deve, obrigatoriamente, ser solicitado por um Prepper remetente, direcionado a um Prepper destinatário válido e assumido por um Portador ativo.
+
+Capacidade de Carga: O peso total dos Itens de um Pedido não pode, em hipótese alguma, exceder a capacidade máxima suportada pelo Portador designado para o transporte.
+
+Condições de Rota e Área: A integridade dos Itens durante a entrega pode ser afetada pelas Características da Área associada ao trajeto ou local. Cargas de alta fragilidade não devem passar por áreas com alta exposição a Timefall (chuva quiral).
+
+Dependência de Conexão: Um Prepper ou Local só pode emitir ou receber novos pedidos pelo sistema se estiver devidamente conectado à Rede Quiral (Status ativo).
+
+Evolução de Confiança: O nível de conexão quiral (Estrelas) de um Prepper e o saldo total de Likes do Portador devem ser atualizados quando um Pedido chega ao seu destino de forma bem-sucedida.
+
+Manutenção de Infraestrutura: As Estruturas construídas sofrem degradação contínua (especialmente em áreas com incidência de Timefall). O banco deve registrar a durabilidade percentual da estrutura, vinculando-a à área em que foi instalada e ao Portador que a criou.
