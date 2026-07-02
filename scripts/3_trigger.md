@@ -2,7 +2,7 @@
 
 ## Regra de negócio
 
-No universo de Death Stranding, quando uma entrega é concluída, o portador recebe likes conforme a qualidade da carga entregue. Além disso, o Prepper do destino aumenta sua confiança no portador, representada pelas estrelas de conexão, e a instalação passa a integrar a Rede Quiral.
+No universo de Death Stranding, quando uma entrega é concluída, o portador recebe likes conforme a qualidade da carga entregue e a condição dela. Além disso, o Prepper do destino aumenta sua confiança no portador, representada pelas estrelas de conexão, e a instalação passa a integrar a Rede Quiral caso essa conexão chegue a duas estrelas.
 
 ## Funcionamento
 

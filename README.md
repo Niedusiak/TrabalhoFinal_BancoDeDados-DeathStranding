@@ -22,32 +22,30 @@ O banco de dados tem como objetivo registrar e gerenciar as operações logísti
 
 Locais: Cadastro de instalações (bunkers, cidades-nó, abrigos e postos avançados) espalhadas pelo mundo, com sua respectiva Região (Leste, Central, Oeste) e status na Rede Quiral.
 
-Características de Área: Mapeamento das condições geográficas e climáticas das regiões (como tipo de terreno, clima, exposição a Timefall e presença de EPs).
+Características de Área: Mapeamento das condições geográficas e climáticas das regiões.
 
-Portadores: Registro dos entregadores ativos no sistema, suas estatísticas e capacidade máxima de carga.
+Portadores: Registro dos entregadores ativos no sistema.
 
-Preppers: Sobreviventes e administradores cadastrados no sistema que emitem os pedidos e recebem entregas em seus respectivos abrigos/cidades, possuindo um nível de conexão (Estrelas).
+Preppers: Sobreviventes e administradores cadastrados no sistema que emitem ou são os destinatários dos pedidos, possuindo um nível de conexão (Estrelas).
 
-Itens: Catálogo de tipos de carga circulantes na rede (ex: medicamentos, peças, alimentos, metais), com suas características de fragilidade e peso padrão.
+Itens: Catálogo de tipos de carga circulantes na rede (medicamentos, peças, alimentos, metais).
 
-Pedidos: Controle das solicitações de entrega, ligando o Local de origem ao Local de destino, além de registrar a carga transportada e seu status.
+Pedidos: Controle das solicitações de entrega. Associa os locais de origem e destino, o Portador responsável pelo transporte e o Prepper que solicitou. Um pedido pode conter múltiplos Itens.
 
-Estruturas: Registro de ferramentas de infraestrutura construídas pelos Portadores (pontes, escadas, geradores) e monitoramento de sua durabilidade.
+Estruturas: Registro de ferramentas de infraestrutura construídas pelos Portadores (pontes, escadas, geradores).
 
-Likes: Sistema de avaliação quantitativa que contabiliza o reconhecimento recebido pelos Portadores.
+Likes: Sistema de avaliação quantitativa. Um like pode ser dado diretamente a um Portador (pela conclusão de um pedido) ou vinculado a uma Estrutura útil deixada no mapa.
 
 3. Restrições e Regras de Negócio
 
-Para o funcionamento adequado da malha logística, o sistema impõe as seguintes restrições:
+Validação de Entrega: Todo pedido deve ser associado a locais válidos, a um Prepper e assumido por um Portador ativo.
 
-Validação de Entrega: Todo pedido de entrega deve, obrigatoriamente, ser associado a um Local de origem e destino válidos, além de assumido por um Portador ativo.
+Capacidade de Carga: O peso total dos Itens não pode exceder a capacidade do Portador.
 
-Capacidade de Carga: O peso total dos Itens de um Pedido não pode exceder a capacidade máxima suportada pelo Portador designado.
+Condições de Rota: Cargas de alta fragilidade requerem rotas seguras contra Timefall.
 
-Condições de Rota: Cargas de alta fragilidade não devem passar por áreas com alta exposição a Timefall.
+Dependência de Conexão: Apenas Locais ativos na Rede Quiral usam o sistema de forma plena (sendo ativados ao atingirem 2 estrelas de conexão).
 
-Dependência de Conexão: Um Local só pode usar a rede de forma plena se estiver com o status ativo na Rede Quiral. Ao atingir 2 estrelas de conexão com o Prepper/Administrador correspondente, o Local é conectado à rede automaticamente.
+Evolução de Confiança: O nível de conexão quiral e o saldo de Likes evoluem mediante entregas bem-sucedidas.
 
-Evolução de Confiança: O nível de conexão quiral (Estrelas) e o saldo de Likes são atualizados mediante entregas bem-sucedidas.
-
-Manutenção de Infraestrutura: As Estruturas sofrem degradação e devem ter sua durabilidade rastreada com base na área onde foram construídas.
+Manutenção e Likes: As Estruturas sofrem degradação e podem receber Likes dos usuários, que são repassados ao Portador que as construiu.
