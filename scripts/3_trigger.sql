@@ -8,7 +8,6 @@ BEGIN
     IF OLD.status_pedido <> 'Entregue'
        AND NEW.status_pedido = 'Entregue' THEN
 
-        -- Adiciona likes ao portador conforme a condição da carga
         UPDATE Portador
         SET total_likes = total_likes +
             CASE
@@ -19,15 +18,12 @@ BEGIN
             END
         WHERE id_portador = NEW.id_portador;
 
-        -- Apenas entregas perfeitas aumentam a conexão com o Prepper
         IF NEW.condicao_final_carga = 'Perfeita' THEN
 
             UPDATE Prepper
             SET estrelas_conexao = LEAST(estrelas_conexao + 1, 5)
             WHERE id_prepper = NEW.id_prepper;
 
-            -- Conecta automaticamente o local à Rede Quiral
-            -- quando o Prepper atingir pelo menos 2 estrelas
             UPDATE Local
             JOIN Prepper
                 ON Local.id_local = Prepper.id_local
