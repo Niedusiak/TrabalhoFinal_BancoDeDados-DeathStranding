@@ -5,7 +5,7 @@ Integrantes
 |     Nome         |     RGA      |
 |------------------|--------------|
 | Mateus Niedusiak | 202522901010 | 
-| Gustavo Torres   | ___________  |
+| Gustavo Torres   | 202021901022 |
 | Matheus Rossa    | 202321901032 |
 
 Descrição do Problema
